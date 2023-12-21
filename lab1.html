@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="lad11.css">
+	<title>Buy2Deli</title>
+</head>
+<body style="font-family: sans-serif;">
+	<div class=".container-fluid">
+        <div class="heading">
+            <h1 class="head">LAB work:</h1>
+        </div>
+
+        <div class="task1">
+            <h2 class="task-title">Task Num1:</h2>
+            <p class="task-description">
+                Write a JavaScript function to find the first not repeated character.
+            </p>
+            <form id="myForm">
+                <label for="inputString"></label><input id="inputString" type="text" name="string" placeholder="Enter a string">
+                <button class="btn" type="button" onclick="handleSubmit()">Get the result</button>
+            </form>
+
+            <div id="result"></div>
+
+            <script>
+                function handleSubmit() {
+                    const inputStringInput = document.getElementById('inputString');
+                    const inputString = inputStringInput.value;
+                    document.getElementById("result").innerText = "Result: " + findFirstNotRepeatedCharacter(inputString);
+                }
+
+                function findFirstNotRepeatedCharacter(str) {
+                    let arr = str.split('');
+                    let result = '';
+                    let count = 0;
+
+                    for (let i = 0; i < arr.length; i++) {
+                        count = 0;
+                        for (let j = 0; j < arr.length; j++) {
+                            if (arr[i] === arr[j]) {
+                                count++;
+                            }
+                        }
+                        if (count < 2) {
+                            result = arr[i];
+                            break;
+                        }
+                    }
+                    return result;
+                }
+            </script>
+        </div>
+
+        <div class="task2">
+            <h2 class="task-title">Task Num2:</h2>
+            <p class="task-description">
+                Write a JavaScript function that generates all combinations of a string.
+            </p>
+            <form id="myForm2">
+                <label for="inputString2"></label><input id="inputString2" type="text" name="string" placeholder="Enter a string">
+                <button class="btn" type="button" onclick="handleSubmit2()">Get the result</button>
+            </form>
+
+            <div id="result2"></div>
+
+            <script>
+                function handleSubmit2() {
+                    const inputString2Input = document.getElementById('inputString2');
+                    const inputString2 = inputString2Input.value;
+
+                    document.getElementById("result2").innerText = "Result: " + substrings(inputString2);
+                }
+                function substrings(str1) {
+                    let array1 = [];
+
+                    for (let x = 0, y = 1; x < str1.length; x++, y++) {
+                        array1[x] = str1.substring(x, y);
+                    }
+
+                    let combi = [];
+                    let temp = "";
+                    let slent = Math.pow(2, array1.length);
+
+                    for (let i = 0; i < slent; i++) {
+                        temp = "";
+
+                        for (let j = 0; j < array1.length; j++) {
+                            if (i & Math.pow(2, j)) {
+                                temp += array1[j];
+                            }
+                        }
+
+                        if (temp !== "") {
+                            combi.push(temp);
+                        }
+                    }
+                    return combi;
+                }
+            </script>
+        </div>
+
+
+
+
+        <div class="task3">
+            <h2 class="task-title">Task Num3:</h2>
+            <p class="task-description">
+                Write a JavaScript function that accepts a string as a parameter and
+                counts the number of vowels within the string.
+            </p>
+            <form id="myForm3">
+                <label for="inputString3"></label><input id="inputString3" type="text" name="string" placeholder="Enter a string">
+                <button class="btn" type="button" onclick="handleSubmit3()">Get the result</button>
+            </form>
+
+            <div id="result3"></div>
+
+            <script>
+                function handleSubmit3() {
+                    const inputString3Input = document.getElementById('inputString3');
+                    const inputString3 = inputString3Input.value;
+
+                    document.getElementById("result3").innerText = "Result: " + vowel_count(inputString3);
+                }
+                function vowel_count(str1) {
+                    let vowel_list = 'aeiouAEIOU';
+                    let vcount = 0;
+
+                    for (let x = 0; x < str1.length; x++) {
+                        if (vowel_list.indexOf(str1[x]) !== -1) {
+                            vcount += 1;
+                        }
+                    }
+                    return vcount;
+                }
+            </script>
+
+        </div>
+
+        <div class="task4">
+            <h2 class="task-title">Task Num4:</h2>
+            <p class="task-description">
+                Write a JavaScript program to display the current day and time in the
+                following format.
+                <br>Sample Output : Today is : Tuesday.
+                <br>Current time is : 10 PM : 30 : 38
+            </p>
+            <form id="myForm4">
+                <button class="btn" type="button" onclick="showCurrentDate()">Get the result</button>
+            </form>
+
+            <div id="result4"></div>
+
+            <script>
+                function showCurrentDate() {
+                    let today = new Date();
+                    let day = today.getDay();
+                    const daylist = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+                    document.getElementById("result4").innerText = "Today is: " + daylist[day] + "."
+
+                    let hour = today.getHours();
+                    let minute = today.getMinutes();
+                    let second = today.getSeconds();
+
+                    let prepand = (hour >= 12) ? " PM " : " AM ";
+
+                    hour = (hour >= 12) ? hour - 12 : hour;
+
+                    if (hour === 0 && prepand === ' PM ') {
+                        if (minute === 0 && second === 0) {
+                            hour = 12;
+                            prepand = ' Noon';
+                        } else {
+                            hour = 12;
+                            prepand = ' PM';
+                        }
+                    }
+
+                    if (hour === 0 && prepand === ' AM ') {
+                        if (minute === 0 && second === 0) {
+                            hour = 12;
+                            prepand = ' Midnight';
+                        } else {
+                            hour = 12;
+                            prepand = ' AM';
+                        }
+                    }
+                    document.getElementById("result4").innerText += " Current time is: " + hour + prepand + " : " + minute + " : " + second
+                }
+            </script>
+        </div>
+
+        <div class="task5">
+            <h2 class="task-title">Task Num5:</h2>
+            <p class="task-description">
+                Write a JavaScript program that adds a keydown event listener to a text
+                input to detect when the "Enter key" is pressed.
+            </p>
+        </div>
+
+
+<label for="textInput"></label><input type="text" id="textInput" placeholder="Press Enter...">
+            <script>
+                const textInput = document.getElementById('textInput');
+                textInput.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter') {
+                        alert('Enter key pressed!');
+                    }
+                });
+            </script>
+        </div>
+
+        <div class="task6">
+            <h2 class="task-title">Task Num6:</h2>
+            <p class="task-description">
+                Write a JavaScript program to implement a sound effect
+            </p>
+
+            <button onclick="playSound()">Play Sound</button>
+
+            <script>
+                function playSound() {
+                    let audio = new Audio();
+                    audio.src = 'sound.wav';
+                    audio.play();
+                }
+            </script>
+        </div>
+
+    </div>
+</body>
+</html>
